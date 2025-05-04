@@ -1,0 +1,22 @@
+name: Extrair ZIP
+
+on:
+  push:
+    paths:
+      - '**.zip'
+
+jobs:
+  unzip:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do repositório
+        uses: actions/checkout@v2
+
+      - name: Instalar unzip e extrair
+        run: |
+          mkdir extraido
+          unzip *.zip -d extraido
+          mv extraido/* .
+          rm -rf extraido
+
